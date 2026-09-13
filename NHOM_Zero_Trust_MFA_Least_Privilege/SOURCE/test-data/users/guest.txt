@@ -1,0 +1,5 @@
+username=guest
+role=guest
+expected=/api/public
+denied=/api/user,/api/admin
+expected_mfa=TOTP required

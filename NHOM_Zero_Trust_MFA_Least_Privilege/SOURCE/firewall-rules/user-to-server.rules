@@ -1,0 +1,3 @@
+ALLOW source VLAN10 role=user -> gateway VLAN50 tcp/5000
+ALLOW gateway VLAN50 -> server VLAN20 tcp/443
+DENY source VLAN10 -> server VLAN20 direct

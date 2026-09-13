@@ -1,0 +1,50 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-nhom16}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-nhom16}
+      KC_HOSTNAME: ${KC_HOSTNAME:-http://localhost:8080}
+      KC_HOSTNAME_STRICT: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: "xforwarded"
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    networks:
+      - dmz
+
+  demo-app:
+    build:
+      context: ../SOURCE/app
+    environment:
+      KEYCLOAK_ISSUER: http://localhost:8080/realms/zero-trust
+      KEYCLOAK_JWKS_URL: http://keycloak:8080/realms/zero-trust/protocol/openid-connect/certs
+      REQUIRED_AUDIENCE: zero-trust-demo
+    ports:
+      - "5000:5000"
+    depends_on:
+      - keycloak
+    networks:
+      - dmz
+      - servers
+
+networks:
+  dmz:
+    name: zt_dmz
+    ipam:
+      config:
+        - subnet: 172.16.50.0/24
+  servers:
+    name: zt_servers
+    ipam:
+      config:
+        - subnet: 172.16.20.0/24
+
+volumes:
+  keycloak_data:

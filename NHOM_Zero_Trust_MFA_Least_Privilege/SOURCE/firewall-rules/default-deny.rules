@@ -1,0 +1,4 @@
+POLICY default-deny
+ALLOW established,related
+DENY all unspecified traffic
+LOG denied traffic with source, destination, port and timestamp

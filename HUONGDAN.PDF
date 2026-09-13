@@ -1,0 +1,22 @@
+HƯỚNG DẪN SỬ DỤNG LAB ZERO TRUST MFA LEAST PRIVILEGE
+
+1. Mở terminal ở thư mục gốc dự án.
+2. Chạy lệnh:
+   cd SETUP
+   Copy-Item .env.example .env
+   docker compose --env-file .env up -d --build
+3. Kiểm tra trạng thái:
+   http://localhost:5000/health
+   http://localhost:8080/realms/zero-trust/.well-known/openid-configuration
+4. Lấy token bằng script Python:
+   python get_tokens.py
+5. Kiểm tra quyền truy cập bằng token trên API:
+   /api/public
+   /api/user
+   /api/admin
+6. Kết quả mong đợi:
+   - public: 200
+   - user: 200 với user/admin, 403 với guest
+   - admin: 200 với admin, 403/401 với user/guest
+
+Đây là file hướng dẫn bản đơn giản để đầy đủ theo yêu cầu đề bài.

@@ -1,0 +1,6 @@
+172.16.10.0/24 -> core router -> firewall policy
+172.16.20.0/24 -> core router -> protected server policy
+172.16.30.0/24 -> core router -> admin policy + MFA
+172.16.40.0/24 -> core router -> Internet/public services only
+172.16.50.0/24 -> DMZ policy -> Keycloak and demo gateway
+172.16.60.0/24 -> management policy -> logs and monitoring only

@@ -1,0 +1,10 @@
+Gateway VLAN 10: 172.16.10.1
+Gateway VLAN 20: 172.16.20.1
+Gateway VLAN 30: 172.16.30.1
+Gateway VLAN 40: 172.16.40.1
+Gateway VLAN 50: 172.16.50.1
+Gateway VLAN 60: 172.16.60.1
+
+Keycloak:       172.16.50.10
+Demo gateway:   172.16.50.20
+Protected API:  172.16.20.10
