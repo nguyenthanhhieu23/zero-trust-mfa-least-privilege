@@ -1,0 +1,9 @@
+VLAN 10 - USERS       - 172.16.10.0/24 - client devices
+VLAN 20 - SERVERS     - 172.16.20.0/24 - protected API/file services
+VLAN 30 - ADMINS      - 172.16.30.0/24 - privileged operator devices
+VLAN 40 - GUESTS      - 172.16.40.0/24 - untrusted client devices
+VLAN 50 - DMZ         - 172.16.50.0/24 - Keycloak and demo gateway
+VLAN 60 - MANAGEMENT  - 172.16.60.0/24 - logs and monitoring
+
+Policy: inter-VLAN traffic is denied by default and explicitly allowed per role,
+source, destination and port.

@@ -1,0 +1,6 @@
+admin  | role=admin | MFA=TOTP required | admin VLAN preferred
+user   | role=user  | MFA=TOTP required | user VLAN
+guest  | role=guest | MFA=TOTP required | guest VLAN
+
+Passwords are defined only for the disposable lab in realm-export.json. Replace
+them before any demonstration outside the isolated environment.

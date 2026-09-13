@@ -1,0 +1,4 @@
+TEST RUN: before Zero Trust policies
+Record the baseline results here, using disposable lab accounts only.
+Expected baseline demonstration: direct access attempts are possible before
+default-deny rules, MFA and role checks are enabled.

@@ -1,0 +1,32 @@
+ZERO TRUST LAN - MFA + LEAST PRIVILEGE
+
+                         [ INTERNET / ATTACKER ]
+                                  |
+                    [ EDGE FIREWALL - DEFAULT DENY ]
+                         NAT / ACL / AUDIT LOGGING
+                         /                       \
+                        /                         \
+          [ DMZ - VLAN 50 ]                 [ CORE L3 ROUTER ]
+          172.16.50.0/24                    INTER-VLAN POLICY
+             |       |                    /    |     |      \
+             |       |                   /     |     |       \
+       [KEYCLOAK] [REVERSE PROXY]       /      |     |        \
+       .50.10     .50.20               /       |     |         \
+     OIDC + MFA  DEMO APP             /        |     |          \
+                                      /         |     |           \
+                         [VLAN 10] [VLAN 20] [VLAN 30] [VLAN 40] [VLAN 60]
+                         USERS     SERVERS    ADMINS    GUESTS    MANAGEMENT
+                         .10.0/24  .20.0/24   .30.0/24  .40.0/24  .60.0/24
+
+ACCESS FLOWS
+  1. User/admin/guest -> Keycloak: OIDC login + MFA.
+  2. Keycloak -> client: token containing role claim.
+  3. Client -> reverse proxy: gateway validates token, role, source and path.
+  4. Reverse proxy -> server: only approved service flow is allowed.
+  5. Guest -> internal VLANs: denied and logged.
+  6. All unspecified traffic: denied by default and logged.
+
+ROLE POLICY
+  admin: approved administrative API, MFA required, admin VLAN preferred.
+  user : approved business API only, MFA required.
+  guest: public/read-only service only, no internal server access.

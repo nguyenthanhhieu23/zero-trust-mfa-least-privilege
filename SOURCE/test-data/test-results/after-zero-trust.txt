@@ -1,0 +1,7 @@
+TEST RUN: after Zero Trust policies
+Expected:
+- missing/invalid token -> HTTP 401
+- valid user token on /api/admin -> HTTP 403
+- valid guest token on /api/user and /api/admin -> HTTP 403
+- valid admin token on /api/admin -> HTTP 200
+- denied network traffic is present in firewall logs

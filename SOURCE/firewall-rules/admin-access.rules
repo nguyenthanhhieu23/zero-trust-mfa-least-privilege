@@ -1,0 +1,3 @@
+ALLOW source VLAN30 role=admin -> gateway VLAN50 tcp/5000
+ALLOW source VLAN60 -> management services only
+DENY role=user,guest -> admin endpoints

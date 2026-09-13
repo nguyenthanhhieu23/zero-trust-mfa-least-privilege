@@ -1,0 +1,4 @@
+username=admin
+role=admin
+expected=/api/public,/api/user,/api/admin
+expected_mfa=TOTP required

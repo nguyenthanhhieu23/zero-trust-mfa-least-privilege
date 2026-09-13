@@ -1,0 +1,69 @@
+{
+  "realm": "zero-trust",
+  "enabled": true,
+  "displayName": "Zero Trust MFA Lab",
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyInitialCounter": 0,
+  "otpPolicyDigits": 6,
+  "otpPolicyLookAheadWindow": 1,
+  "otpPolicyPeriod": 30,
+  "roles": {
+    "realm": [
+      { "name": "admin" },
+      { "name": "user" },
+      { "name": "guest" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "zero-trust-demo",
+      "name": "Zero Trust Demo API",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:5000/*", "*"],
+      "webOrigins": ["http://localhost:5000", "*"]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "email": "admin@zerotrust.local",
+      "firstName": "Admin",
+      "lastName": "System",
+      "emailVerified": true,
+      "requiredActions": [],
+      "realmRoles": ["admin"],
+      "credentials": [{ "type": "password", "value": "ChangeMe_AdminUser_123!", "temporary": false }]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "email": "user@zerotrust.local",
+      "firstName": "User",
+      "lastName": "Member",
+      "emailVerified": true,
+      "requiredActions": [],
+      "realmRoles": ["user"],
+      "credentials": [{ "type": "password", "value": "ChangeMe_User_123!", "temporary": false }]
+    },
+    {
+      "username": "guest",
+      "enabled": true,
+      "email": "guest@zerotrust.local",
+      "firstName": "Guest",
+      "lastName": "Visitor",
+      "emailVerified": true,
+      "requiredActions": [],
+      "realmRoles": ["guest"],
+      "credentials": [{ "type": "password", "value": "ChangeMe_Guest_123!", "temporary": false }]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+admin: access to /api/admin and /api/user
+user:  access to /api/user only
+guest: access to /api/public only

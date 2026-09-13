@@ -1,0 +1,5 @@
+Provider: Keycloak
+Protocol: OpenID Connect
+Second factor: TOTP, 6 digits, 30-second period
+Enrollment: CONFIGURE_TOTP required at first login
+Test condition: login without the configured OTP must not produce an access token
